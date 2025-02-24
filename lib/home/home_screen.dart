@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
     _requestPermissions();
   }
 
+  //! Method to request overlay window permissions
   void _requestPermissions() async {
     bool isGranted = await FlutterOverlayWindow.isPermissionGranted();
     if (!isGranted) {
@@ -30,16 +31,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //! AppBar with a centered title
         title: const Text('بسم الله'),
         centerTitle: true,
       ),
       body: Center(
+        //! Centered column containing input field and buttons
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextFormField(
+                //! Input field for entering time in seconds
                 controller: _controller,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
@@ -55,6 +59,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TextButton(
+              //! Button to start the overlay
               onPressed: _startOverlay,
               child: const Text(
                 "بدء",
@@ -62,6 +67,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TextButton(
+              //! Button to stop the overlay and cancel the timer
               onPressed: () {
                 FlutterOverlayWindow.closeOverlay();
                 _timer!.cancel();
@@ -77,6 +83,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  //! Method to start the overlay with a timer based on user input
   void _startOverlay() {
     final int? seconds = int.tryParse(_controller.text);
     if (seconds == null || seconds <= 0) {
@@ -86,7 +93,7 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    _timer?.cancel(); // إلغاء أي مؤقت شغال حاليًا
+    _timer?.cancel(); //! Cancel the previous timer if it exists
     _timer = Timer.periodic(Duration(seconds: seconds), (timer) async {
       if (await FlutterOverlayWindow.isActive()) return;
       await FlutterOverlayWindow.showOverlay(
@@ -105,6 +112,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    //! Dispose of controllers and timers
     _controller.dispose();
     _timer?.cancel();
     super.dispose();

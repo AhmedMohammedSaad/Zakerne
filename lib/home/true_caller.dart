@@ -9,6 +9,7 @@ class TrueCallerOverlay extends StatefulWidget {
 }
 
 class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
+  //! This list defines a gradient with gold-like colors for styling purposes
   final _goldColors = const [
     Color(0xFFa2790d),
     Color(0xFFebd197),
@@ -18,9 +19,11 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      //! Make the background transparent
       color: Colors.transparent,
+      //! The child of the material is aligned to the center of the screen
       child: Align(
-        alignment: Alignment.center, // لضبط النافذة في منتصف الشاشة
+        alignment: Alignment.center,
         child: Container(
           padding: const EdgeInsets.all(16.0),
           width: MediaQuery.of(context).size.width * 0.8,
@@ -41,8 +44,10 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min, // ! not MainAxisSize.max
+
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              //! It is used to align the close button to the right of the column
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
@@ -55,7 +60,10 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
                   ),
                 ),
               ),
+
               const Divider(color: Colors.black54),
+
+              //! It is used to display the message
               Text(
                 "بسم الله الرحمن الرحيم",
                 style: TextStyle(
