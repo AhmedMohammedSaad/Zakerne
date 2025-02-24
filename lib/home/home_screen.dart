@@ -42,9 +42,12 @@ class _HomePageState extends State<HomePage> {
               child: TextFormField(
                 controller: _controller,
                 keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: "اضف الوقت بالثواني",
                   hintStyle: const TextStyle(fontSize: 20),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -55,6 +58,16 @@ class _HomePageState extends State<HomePage> {
               onPressed: _startOverlay,
               child: const Text(
                 "بدء",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                FlutterOverlayWindow.closeOverlay();
+                _timer!.cancel();
+              },
+              child: const Text(
+                "إيقاف",
                 style: TextStyle(fontSize: 30),
               ),
             ),
@@ -82,6 +95,7 @@ class _HomePageState extends State<HomePage> {
         flag: OverlayFlag.defaultFlag,
         visibility: NotificationVisibility.visibilityPublic,
         positionGravity: PositionGravity.auto,
+        // ignore: use_build_context_synchronously
         height: (MediaQuery.of(context).size.height * 0.6).toInt(),
         width: WindowSize.matchParent,
         startPosition: const OverlayPosition(0, -259),

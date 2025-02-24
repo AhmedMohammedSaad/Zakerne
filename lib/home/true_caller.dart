@@ -9,19 +9,10 @@ class TrueCallerOverlay extends StatefulWidget {
 }
 
 class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
-  bool isGold = true;
-
   final _goldColors = const [
     Color(0xFFa2790d),
     Color(0xFFebd197),
     Color(0xFFa2790d),
-  ];
-
-  final _silverColors = const [
-    Color(0xFFAEB2B8),
-    Color(0xFFC7C9CB),
-    Color(0xFFD7D7D8),
-    Color(0xFFAEB2B8),
   ];
 
   @override
@@ -37,7 +28,7 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: isGold ? _goldColors : _silverColors,
+              colors: _goldColors,
             ),
             borderRadius: BorderRadius.circular(15.0),
             boxShadow: [
@@ -49,19 +40,9 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
             ],
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // يمنع تمدد الودجت لملء الشاشة
+            mainAxisSize: MainAxisSize.min, // ! not MainAxisSize.max
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                "بسم الله الرحمن الرحيم",
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
-              const Divider(color: Colors.black54),
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
@@ -73,6 +54,16 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
                     color: Colors.black,
                   ),
                 ),
+              ),
+              const Divider(color: Colors.black54),
+              Text(
+                "بسم الله الرحمن الرحيم",
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
